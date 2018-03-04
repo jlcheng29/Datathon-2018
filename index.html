@@ -130,57 +130,191 @@
 <body>
 <form action="/action_page.php">
     <select id= "input">
-        <option value="option1">Volvo</option>
-        <option value="option2">Saab</option>
-        <option value="total">Fiat</option>
+        <option value="option1">January</option>
+        <option value="option2">February</option>
+        <option value="option3">March</option>
+        <option value="option4">April</option>
+        <option value="option5">May</option>
+        <option value="option6">June</option>
+        <option value="option7">July</option>
+        <option value="option8">August</option>
+        <option value="option9">September</option>
+        <option value="option10">October</option>
+        <option value="option11">November</option>
+        <option value="option12">December</option>
     </select>  
 </form>
 <script src="http://d3js.org/d3.v3.min.js"></script>
 <script>
 
-    datasetTotal = [
-        {label:"Category 1", value:19},
-        {label:"Category 2", value:5},
-        {label:"Category 3", value:13},
-        {label:"Category 4", value:17},
-        {label:"Category 5", value:21},
-        {label:"Category 6", value:25}
-    ];
-
     datasetOption1 = [
-        {label:"Category 1", value:22},
-        {label:"Category 2", value:33},
-        {label:"Category 3", value:4},
-        {label:"Category 4", value:15},
-        {label:"Category 5", value:36},
-        {label:"Category 6", value:0}
+        {label:"Portland", value:35.51},
+        {label:"Concord", value:36.37},
+        {label:"Burlington", value:35.89},
+        {label:"Windsor Locks", value:36.44},
+        {label:"Providence", value:36.52},
+        {label:"Worcester", value:36.67},
+        {label:"Boston", value:36.99},
     ];
 
     datasetOption2 = [
-        {label:"Category 1", value:10},
-        {label:"Category 2", value:20},
-        {label:"Category 3", value:30},
-        {label:"Category 4", value:5},
-        {label:"Category 5", value:12},
-        {label:"Category 6", value:23}
+        {label:"Portland", value:27.19},
+        {label:"Concord", value:27.93},
+        {label:"Burlington", value:27.49},
+        {label:"Windsor Locks", value:27.99},
+        {label:"Providence", value:28.02},
+        {label:"Worcester", value:28.11},
+        {label:"Boston", value:29.02},
     ];
+
+    datasetOption3 = [
+        {label:"Portland", value:31.99},
+        {label:"Concord", value:34.04},
+        {label:"Burlington", value:33.83},
+        {label:"Windsor Locks", value:35.13},
+        {label:"Providence", value:34.57},
+        {label:"Worcester", value:34.87},
+        {label:"Boston", value:34.73},
+    ];
+    
+    datasetOption4 = [
+        {label:"Portland", value:29.54},
+        {label:"Concord", value:31.20},
+        {label:"Burlington", value:30.43},
+        {label:"Windsor Locks", value:31.85},
+        {label:"Providence", value:31.21},
+        {label:"Worcester", value:31.56},
+        {label:"Boston", value:31.62},
+    ];
+
+    datasetOption5 = [
+        {label:"Portland", value:18.95},
+        {label:"Concord", value:23.00},
+        {label:"Burlington", value:26.09},
+        {label:"Windsor Locks", value:28.99},
+        {label:"Providence", value:29.49},
+        {label:"Worcester", value:29.31},
+        {label:"Boston", value:34.30},
+    ];
+    
+    datasetOption6 = [
+        {label:"Portland", value:22.89},
+        {label:"Concord", value:23.44},
+        {label:"Burlington", value:23.59},
+        {label:"Windsor Locks", value:24.83},
+        {label:"Providence", value:23.81},
+        {label:"Worcester", value:24.03},
+        {label:"Boston", value:24.78},
+    ];
+    
+    datasetOption7 = [
+        {label:"Portland", value:25.83},
+        {label:"Concord", value:26.50},
+        {label:"Burlington", value:26.40},
+        {label:"Windsor Locks", value:27.12},
+        {label:"Providence", value:26.48},
+        {label:"Worcester", value:26.71},
+        {label:"Boston", value:26.56},
+    ];
+    datasetOption8 = [
+        {label:"Portland", value:23.38},
+        {label:"Concord", value:23.77},
+        {label:"Burlington", value:23.82},
+        {label:"Windsor Locks", value:24.14},
+        {label:"Providence", value:23.64},
+        {label:"Worcester", value:23.87},
+        {label:"Boston", value:23.71},
+    ];
+    datasetOption9 = [
+        {label:"Portland", value:28.04},
+        {label:"Concord", value:26.44},
+        {label:"Burlington", value:26.43},
+        {label:"Windsor Locks", value:26.62},
+        {label:"Providence", value:26.00},
+        {label:"Worcester", value:26.42},
+        {label:"Boston", value:26.69},
+    ];
+    datasetOption10 = [
+        {label:"Portland", value:27.13},
+        {label:"Concord", value:29.52},
+        {label:"Burlington", value:30.78},
+        {label:"Windsor Locks", value:31.41},
+        {label:"Providence", value:31.53},
+        {label:"Worcester", value:31.82},
+        {label:"Boston", value:32.96},
+    ];
+    datasetOption11 = [
+        {label:"Portland", value:31.06},
+        {label:"Concord", value:32.61},
+        {label:"Burlington", value:32.48},
+        {label:"Windsor Locks", value:33.04},
+        {label:"Providence", value:33.14},
+        {label:"Worcester", value:33.36},
+        {label:"Boston", value:33.93},
+    ];
+    datasetOption12 = [
+        {label:"Portland", value:74.27},
+        {label:"Concord", value:77.57},
+        {label:"Burlington", value:77.93},
+        {label:"Windsor Locks", value:78.39},
+        {label:"Providence", value:79.73},
+        {label:"Worcester", value:79.77},
+        {label:"Boston", value:80.61},
+    ];
+  
 
     d3.select('#input').on("change", selectDataset);
 
     function selectDataset()
     {
         var value = this.value;
-        if (value == "total")
-        {
-            change(datasetTotal);
-        }
-        else if (value == "option1")
+        if (value == "option1")
         {
             change(datasetOption1);
         }
         else if (value == "option2")
         {
             change(datasetOption2);
+        }
+        else if (value == "option3")
+        {
+            change(datasetOption3);
+        }
+        else if (value == "option4")
+        {
+            change(datasetOption4);
+        }
+        else if (value == "option5")
+        {
+            change(datasetOption5);
+        }
+        else if (value == "option6")
+        {
+            change(datasetOption6);
+        }
+        else if (value == "option7")
+        {
+            change(datasetOption7);
+        }
+        else if (value == "option8")
+        {
+            change(datasetOption8);
+        }
+        else if (value == "option9")
+        {
+            change(datasetOption9);
+        }
+        else if (value == "option10")
+        {
+            change(datasetOption10);
+        }
+        else if (value == "option11")
+        {
+            change(datasetOption11);
+        }
+        else if (value == "option12")
+        {
+            change(datasetOption12);
         }
     }
 
@@ -193,7 +327,7 @@
     var formatPercent = d3.format("");
 
     var y = d3.scale.ordinal()
-            .rangeRoundBands([height, 0], .2, 1);
+            .rangeRoundBands([height, 0], .2, 0.5);
 
     var x = d3.scale.linear()
             .range([0, width]);
