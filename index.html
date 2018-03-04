@@ -8,15 +8,6 @@
         height: 500px;
         position: relative;
     }
-
-    /*
-    body {
-      font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
-      width: 960px;
-      height: 500px;
-      position: relative;
-    }
-    */
     svg {
         width: 100%;
         height: 100%;
@@ -134,6 +125,7 @@
         display: none;
     }
 
+
 </style>
 <body>
 <form>
@@ -141,19 +133,16 @@
     <label><input type="radio" name="dataset" id="dataset" value="option1"> Option 1</label>
     <label><input type="radio" name="dataset" id="dataset" value="option2"> Option 2</label>
 </form>
-
 <script src="http://d3js.org/d3.v3.min.js"></script>
 <script>
-
-    d3.select("input[value=\"total\"]").property("checked", true);
 
     datasetTotal = [
         {label:"Category 1", value:19},
         {label:"Category 2", value:5},
         {label:"Category 3", value:13},
         {label:"Category 4", value:17},
-        {label:"Category 5", value:19},
-        {label:"Category 6", value:27}
+        {label:"Category 5", value:21},
+        {label:"Category 6", value:25}
     ];
 
     datasetOption1 = [
@@ -193,7 +182,7 @@
         }
     }
 
-    var margin = {top: (parseInt(d3.select('body').style('height'), 10)/10), right: (parseInt(d3.select('body').style('width'), 10)/20), bottom: (parseInt(d3.select('body').style('height'), 10)/10), left: (parseInt(d3.select('body').style('width'), 10)/20)},
+    var margin = {top: (parseInt(d3.select('body').style('height'), 10)/20), right: (parseInt(d3.select('body').style('width'), 10)/20), bottom: (parseInt(d3.select('body').style('height'), 10)/20), left: (parseInt(d3.select('body').style('width'), 10)/5)},
             width = parseInt(d3.select('body').style('width'), 10) - margin.left - margin.right,
             height = parseInt(d3.select('body').style('height'), 10) - margin.top - margin.bottom;
 
@@ -201,20 +190,21 @@
 
     var formatPercent = d3.format("");
 
-    var x = d3.scale.ordinal()
-            .rangeRoundBands([0, width], .2, 0.5);
+    var y = d3.scale.ordinal()
+            .rangeRoundBands([height, 0], .2, 0.5);
 
-    var y = d3.scale.linear()
-            .range([height, 0]);
+    var x = d3.scale.linear()
+            .range([0, width]);
 
     var xAxis = d3.svg.axis()
             .scale(x)
+            .tickSize(-height)
             .orient("bottom");
 
     var yAxis = d3.svg.axis()
             .scale(y)
-            .orient("left")
-            .tickFormat(formatPercent);
+            .orient("left");
+    //.tickFormat(formatPercent);
 
     var svg = d3.select("body").append("svg")
             .attr("width", width + margin.left + margin.right)
@@ -227,12 +217,13 @@
             .attr("transform", "translate(0," + height + ")")
             .call(xAxis);
 
+    d3.select("input[value=\"total\"]").property("checked", true);
     change(datasetTotal);
 
     function change(dataset) {
 
-        x.domain(dataset.map(function(d) { return d.label; }));
-        y.domain([0, d3.max(dataset, function(d) { return d.value; })]);
+        y.domain(dataset.map(function(d) { return d.label; }));
+        x.domain([0, d3.max(dataset, function(d) { return d.value; })]);
 
         svg.append("g")
                 .attr("class", "x axis")
@@ -246,21 +237,22 @@
                 .attr("class", "y axis")
                 .call(yAxis)
                 .append("text")
-                .attr("transform", "rotate(-90)")
-                .attr("y", 6)
-                .attr("dy", ".71em")
+                .attr("transform", "rotate(0)")
+                .attr("x", 50)
+                .attr("dx", ".1em")
                 .style("text-anchor", "end")
-                .text("Distribution %");
+                .text("Option %");
+
 
         var bar = svg.selectAll(".bar")
                 .data(dataset, function(d) { return d.label; });
         // new data:
         bar.enter().append("rect")
                 .attr("class", "bar")
-                .attr("x", function(d) { return x(d.label); })
-                .attr("y", function(d) { return y(d.value); })
-                .attr("height", function(d) { return height - y(d.value); })
-                .attr("width", x.rangeBand());
+                .attr("x", function(d) { return x(d.value); })
+                .attr("y", function(d) { return y(d.label); })
+                .attr("width", function(d) { return width-x(d.value); })
+                .attr("height", y.rangeBand());
 
         bar
                 .on("mousemove", function(d){
@@ -274,15 +266,18 @@
                     div.style("display", "none");
                 });
 
+
         // removed data:
         bar.exit().remove();
-        // updated data:
-        bar
-                .transition()
-                .duration(750)
-                .attr("y", function(d) { return y(d.value); })
-                .attr("height", function(d) { return height - y(d.value); });
-    };
 
+        // updated data:
+        bar.transition()
+                .duration(750)
+                .attr("x", function(d) { return 0; })
+                .attr("y", function(d) { return y(d.label); })
+                .attr("width", function(d) { return x(d.value); })
+                .attr("height", y.rangeBand());
+
+    };
 </script>
 </body>
