@@ -334,7 +334,7 @@
 
     var xAxis = d3.svg.axis()
             .scale(x)
-            .tickSize(-height)
+            .tickValues(d3.range(0, 80, 10))
             .orient("bottom");
 
     var yAxis = d3.svg.axis()
@@ -377,7 +377,7 @@
                 .attr("x", 50)
                 .attr("dx", ".1em")
                 .style("text-anchor", "end")
-                .text("Option %");
+                .text("Average Real Time LMP");
 
 
         var bar = svg.selectAll(".bar")
