@@ -450,62 +450,49 @@
 </style>
 </head>
 <body>
-
-<div class="dropdown">
-  <img src="portland.png" alt="portland" width="300" height="200">
-  <div class="dropdown-content">
-    <img src="portland.png" alt="portland" width="600" height="400">
-    <div class="desc">Portland: Month vs Peak Hour</div>
-  </div>
-</div>
-
-<div class="dropdown">
-  <img src="concord.png" alt="concord" width="300" height="200">
-  <div class="dropdown-content">
-    <img src="concord.png" alt="concord" width="600" height="400">
-    <div class="desc">Concord: Month vs Peak Hour</div>
-  </div>
-</div>
-
-<div class="dropdown">
-  <img src="burlington.png" alt="burlington" width="300" height="200">
-  <div class="dropdown-content">
-    <img src="burlington.png" alt="burlington" width="600" height="400">
-    <div class="desc">Burlington: Month vs Peak Hour</div>
-  </div>
-</div>
-    
-<div class="dropdown">
-  <img src="worcester.png" alt="worcester" width="300" height="200">
-  <div class="dropdown-content">
-    <img src="worcester.png" alt="worcester" width="600" height="400">
-    <div class="desc">Worcester: Month vs Peak Hour</div>
-  </div>
-</div>
-    
-<div class="dropdown">
-  <img src="boston.png" alt="boston" width="300" height="200">
-  <div class="dropdown-content">
-    <img src="boston.png" alt="boston" width="600" height="400">
-    <div class="desc">Boston: Month vs Peak Hour</div>
-  </div>
-</div>
-    
-<div class="dropdown">
-  <img src="providenc.png" alt="providence" width="300" height="200">
-  <div class="dropdown-content">
-    <img src="providenc.png" alt="providence" width="600" height="400">
-    <div class="desc">Providence: Month vs Peak Hour</div>
-  </div>
-</div>
-
-<div class="dropdown">
-  <img src="windsor_locks.png" alt="windsor_locks" width="300" height="200">
-  <div class="dropdown-content">
-    <img src="windsor_locks.png" alt="windsor_locks" width="600" height="400">
-    <div class="desc">Windsor Locks: Month vs Peak Hour</div>
-  </div>
-</div>
-    
+<form action="/action_page.php">
+    <select id= "ind">
+        <option value="option1">Portland</option>
+        <option value="option2">Burlington</option>
+        <option value="option3">Windsor Locks</option>
+        <option value="option4">Providence</option>
+        <option value="option5">Boston</option>
+        <option value="option6">Concord</option>
+        <option value="option7">Worcester</option>
+    </select>  
+</form>
+    d3.select('#ind').on("change", selectPic);
+    function selectPic()
+    {
+        var value = this.value;
+        if (value == "option1")
+        {
+            <img src="portland.png" alt="portland" width="300" height="200">;
+        }
+        else if (value == "option2")
+        {
+            <img src="burlington.png" alt="burlington" width="300" height="200">;        
+        }
+        else if (value == "option3")
+        {
+            <img src="windsor_locks.png" alt="burlington" width="300" height="200">;        
+        }
+        else if (value == "option4")
+        {
+            <img src="providenc.png" alt="burlington" width="300" height="200">;
+        }
+        else if (value == "option5")
+        {
+            <img src="boston.png" alt="burlington" width="300" height="200">;
+        }
+        else if (value == "option6")
+        {
+            <img src="concord.png" alt="burlington" width="300" height="200">;
+        }
+        else if (value == "option7")
+        {
+            <img src="worcester.png" alt="burlington" width="300" height="200">;
+        } 
+    }
 
 </body>
