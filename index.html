@@ -193,14 +193,14 @@
     var formatPercent = d3.format("");
 
     var y = d3.scale.ordinal()
-            .rangeRoundBands([height, 0], .2, 0.5);
+            .rangeRoundBands([height, 0], .2, 1);
 
     var x = d3.scale.linear()
             .range([0, width]);
 
     var xAxis = d3.svg.axis()
             .scale(x)
-            .tickSize(12, 12)
+            .tickSize(-height)
             .orient("bottom");
 
     var yAxis = d3.svg.axis()
